@@ -1,4 +1,5 @@
 const express = require('express');
+const calc = require('./calc');
 
 const app = express();
 
@@ -13,21 +14,10 @@ app.get('/health', async(req, res) => {
 })
 
 app.post('/company', async(req, res) => {
-    const data = {
-    
+    const companyData = {
+        name: req.body.companyName,
+        revenueSources: req.body.revenueSources
     }
-    // create metrics from goal and add to db
-    res.json()
-})
-
-app.get('/company', async(req, res) => {
-    const deviceId = req.params.device_id
-    const query = db.collection('metrics').where('device_id', '==', deviceId).limit(1)
-    response = await query.get();
-    if (response.size < 1) {
-        res.json({status: 'No metrics found for id'});
-    }
-    else {
-        res.json(response.docs()[0].data());
-    }
+    const company = calc.calculateSDGAlignment(companyData)
+    res.json(company)
 })
