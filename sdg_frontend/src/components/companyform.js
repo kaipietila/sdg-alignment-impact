@@ -1,18 +1,37 @@
-import axios from 'axios';
+import { useState } from 'react';
 
 export const CompanyForm = (props) => {
-    const handleSubmit = (data) => {
-        console.log(`submitted form with ${data}`)
-        axios.post('localhost:8080/company', data={data}).then(response.body)
+    const [companyName, setCompanyName] = useState('')
+    const [revenueSources, setRevenueSources] = useState('')
+    const handleSubmit = (e) => {
+        e.preventDefault()
+        props.setCompanyData({
+            'companyName': companyName, 
+            'revenueSources': [revenueSources]
+        });
     }
   
     return (
         <div>
           <form onSubmit = {handleSubmit}>
-            <input value = {companyName}></input>
-            <input value = {revenueSource}></input>
+            <label>
+                Company name:
+            <input
+            type = 'text'
+            defaultValue = {companyName || ""}
+            onChange = {(e) => setCompanyName(e.target.value)}
+            />
+            </label>
+            <label>
+                Company revenue sources(enter e.g. fishing.fishFarming, fishing.tuna):
+            <input 
+            type = 'text'
+            defaultValue = {revenueSources || ""}
+            onChange = {(e) => setRevenueSources(e.target.value)}
+            />
+            </label>
             <button type = 'submit'>Submit company data</button>
         </form>
-        </div>
+    </div>
       );
   }

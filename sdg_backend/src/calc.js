@@ -19,7 +19,7 @@ const mergeAlignments = (alignments) => {
         }, {...res})
         return newRes
     }, {})
-    return mergedAlignments
+    return mergedAlignments[0]
 }
 
 const calculateSDGAlignment = (companyData) => {
@@ -44,7 +44,7 @@ const calculateSDGAlignment = (companyData) => {
         mergedCompanyAlignments = mergeAlignments(companyAlignments)
         return mergedAlignments
     }
-    return companyAlignments
+    return companyAlignments[0]
 };   
 
 exports.calculateSDGAlignment = calculateSDGAlignment;
