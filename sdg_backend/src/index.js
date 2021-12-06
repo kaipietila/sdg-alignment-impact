@@ -1,5 +1,6 @@
 const express = require('express');
 const calc = require('./calc');
+const stores = require('./stores')
 
 const app = express();
 
@@ -20,4 +21,9 @@ app.post('/company', async(req, res) => {
     }
     const company = calc.calculateSDGAlignment(companyData)
     res.json(company)
+})
+
+app.get('/revenuesources', async(req, res) => {
+    const hierarchy = stores.industryHierarchy
+    res.json(hierarchy)
 })

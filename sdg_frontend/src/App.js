@@ -1,52 +1,19 @@
 import React, { useEffect, useState } from 'react';
-
-const GetCompanyForm = (props) => {
-  const handleSubmit = (data) => {
-
-  }
-
-  return (
-      <div>
-        <form>
-          <label>
-            Company:
-            <input type="text" name="company" />
-          </label>
-          <input type="submit" value="Submit" />
-        </form>
-      </div>
-    );
-}
-
-const CompanyList = (companies) => {
-  return (
-    <div>
-      Company List 
-      <li>
-      {companies.map((company) => (
-        <ul> {company.name} </ul>
-      ))}
-      </li>
-    </div>
-  )
-}
-
-
+import { CompanyForm } from './components/companyform';
  
-const baseUrl = 'localhost:8080/company'
-const CompanyView = (props) => {
-  const [selectedCompany, setSelectedCompany] = useState('') 
-  let data;
+const baseUrl = 'localhost:8080'
+const CompanyView = () => {
+  const [companyData, setCompanyData] = useState({}) 
+  let revenueSources = {};
 
   useEffect(() => {
-    data = fetch(baseUrl)
+    revenueSources = fetch(baseUrl + '/revenuesources')
   }, [])
 
   return ( 
     <div>
-      <GetCompanyForm setSelectedCompany={setSelectedCompany} />
-      <CompanyList companies={data} />
-      
+      <CompanyForm setCompanyData={setCompanyData} revenueSources={revenueSources} />
+      <Chart companyData={companyData} />
     </div>
    );
 }
