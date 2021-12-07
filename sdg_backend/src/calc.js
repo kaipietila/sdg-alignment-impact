@@ -15,12 +15,21 @@ const mergeAlignments = (alignments) => {
         } 
         return [...res, curr]
     }, []);
-    console.log(getCompanyAlignments)
     return getCompanyAlignments
 }
 
+const enrichAlignmentData = (companyAlignments) => {
+    enriched = companyAlignments.reduce((result, alignment) => {
+        goal = stores.sdgMapping[alignment.goal]
+        verbose = stores.alignmentMapping[alignment.alignment]
+        return [...result, {'goal': goal, 'alignment': alignment.alignment, 'verbose': verbose}]
+    }, []);
+    return enriched
+}
+
 const calculateSDGAlignment = (companyData) => {
-    alignmentStore = stores.alignmentStore
+    const alignmentStore = stores.alignmentStore
+    let alignments;
     // Get alignment for each goal for a revenue source the company chooses.
     // If alignment for revenue source is not specified we will use parent alignment.
     // Get mean alignment for all revenue sources which is the company alignment.
@@ -41,9 +50,11 @@ const calculateSDGAlignment = (companyData) => {
     });
     if (companyAlignments.length > 1) {
         mergedCompanyAlignments = mergeAlignments(companyAlignments)
-        return mergedCompanyAlignments
+        alignments = enrichAlignmentData(mergedCompanyAlignments)
     }
-    return companyAlignments
+    alignments = enrichAlignmentData(companyAlignments[0])
+    console.log(alignments)
+    return alignments
 };   
 
 exports.calculateSDGAlignment = calculateSDGAlignment;

@@ -18,8 +18,8 @@ const sdgMapping = {
     17: "Partnerships to achieve the Goal"
 }
 const alignmentMapping = {
-    1: "strongly aligned",
-    2: "aligned",
+    2: "strongly aligned",
+    1: "aligned",
     3: "misaligned",
     4: "strongly misaligned"
 }

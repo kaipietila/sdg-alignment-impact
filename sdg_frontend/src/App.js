@@ -7,24 +7,24 @@ const baseUrl = 'http://localhost:8080'
 export const CompanyView = () => {
   const [companyData, setCompanyData] = useState({}) 
   const [revenueSources, setRevenueSources] = useState({})
-  const [data, setData] = useState({})
+  const [data, setData] = useState([])
 
   useEffect(() => {
     axios.get(baseUrl + '/revenuesources').then((response) => setRevenueSources(response.data))
   }, []);
   
-  async function createCompany() {
-    let payload = companyData;
-    let res = await axios.post(baseUrl + '/companyalignment', payload);
-
-    setData(res.data);
-    console.log(data);
-  }
   useEffect(() => {
-    createCompany()
-  }, [companyData])
-
-
+    async function createCompany() {
+      let payload = companyData;
+      let res = await axios.post(baseUrl + '/companyalignment', payload);
+  
+      setData(res.data);
+    }
+    if (Object.keys(companyData).length) {
+      createCompany()
+    }
+  }, [companyData]);
+  console.log(data)
   return ( 
     <div>
       <div>
