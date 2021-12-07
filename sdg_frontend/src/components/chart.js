@@ -11,6 +11,17 @@ import {
 import { Header } from './header';
 
 export const Chart = (props) => {
+    const CustomTooltip = ({ active, payload, label }) => {
+        console.log(payload)
+        if (active && payload && payload.length) {
+          return (
+            <div>
+              <p back>{`${label} : ${payload[0].payload.verbose}`}</p>
+            </div>
+          );
+        }
+        return null;
+      };
     let header;
     if (props.companyData.companyName) {
         header = `${props.companyData.companyName}, revenue sources = ${props.companyData.revenueSources}`
@@ -26,10 +37,10 @@ export const Chart = (props) => {
         return (
             <>
                 <Header header={header} />
-                <ResponsiveContainer width="100%" height={300}>
+                <ResponsiveContainer width="100%" height={500}>
                     <BarChart
                     width={500}
-                    height={300}
+                    height={400}
                     data={props.data}
                     margin={{
                         top: 5,
@@ -40,8 +51,8 @@ export const Chart = (props) => {
                     >
                         <CartesianGrid strokeDasharray="3 3" />
                         <XAxis dataKey="goal" />
-                        <YAxis />
-                        <Tooltip />
+                        <YAxis type='number' domain={['dataMin-2', 'dataMax+1']}/>
+                        <Tooltip content={<CustomTooltip />}/>
                         <Legend />
                         <ReferenceLine y={0} stroke="#000" />
                         <Bar dataKey="alignment" fill="#8884d8" />

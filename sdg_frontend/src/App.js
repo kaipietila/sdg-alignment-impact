@@ -24,7 +24,6 @@ export const CompanyView = () => {
       createCompany()
     }
   }, [companyData]);
-  console.log(data)
   return ( 
     <div>
       <div>

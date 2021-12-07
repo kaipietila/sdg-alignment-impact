@@ -10,7 +10,7 @@ const mergeAlignments = (alignments) => {
     const getCompanyAlignments = flattenAlignments.reduce((res, curr) => {
         const duplicateIndex = res.findIndex((alignment) => alignment.goal === curr.goal)
         if (duplicateIndex !== -1) {
-            res[duplicateIndex].alignment = Math.round((res[duplicateIndex].alignment + curr.alignment) / 2)
+            res[duplicateIndex].alignment = string(Math.round((parseInt(res[duplicateIndex].alignment) + parseInt(curr.alignment)) / 2))
             return [...res]
         } 
         return [...res, curr]
