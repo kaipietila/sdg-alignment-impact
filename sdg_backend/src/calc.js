@@ -38,9 +38,10 @@ const calculateSDGAlignment = (companyData) => {
         let subsource;
         [parent, subsource] = source.split('.')
         const sourceAlignments = alignmentStore[subsource]
-        console.log(sourceAlignments)
-        if (sourceAlignments.length <= 17) {
-            const parentAlignments = [...alignmentStore[parent]]
+        const parentAlignments = [...alignmentStore[parent]]
+        if (!sourceAlignments) {
+            return parentAlignments
+        } else if (sourceAlignments.length <= 17) {
             const sourceSpecifiedGoals = sourceAlignments.map((goal) => goal.goal)
             parentMerged = [...parentAlignments.filter((goal) => !sourceSpecifiedGoals.includes(goal.goal)), 
                 ...sourceAlignments]

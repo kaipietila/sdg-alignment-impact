@@ -3,6 +3,8 @@ import TextField from '@mui/material/TextField';
 import { Box } from '@mui/system';
 import { IconButton } from '@mui/material';
 import KeyboardReturnIcon from '@mui/icons-material/KeyboardReturn';
+import Select from '@mui/material/Select';
+import { MenuItem } from '@mui/material';
 
 export const CompanyForm = (props) => {
     const [companyName, setCompanyName] = useState('')
@@ -14,6 +16,12 @@ export const CompanyForm = (props) => {
             'revenueSources': [revenueSources]
         });
     }
+    const sourceSelection = Object.entries(props.revenueSources).reduce((res, source) => {
+        const formattedSources = source[1].map((subsource) => {
+            return `${source[0]}.${subsource}`
+        })
+        return [...res, ...formattedSources]
+    }, [])
   
     return (
         <Box 
@@ -29,13 +37,15 @@ export const CompanyForm = (props) => {
                 onChange={(e) => setCompanyName(e.target.value)}
                 sx = {{ marginLeft: '20px' }}
                 />
-                <TextField
-                id="revenue-source"
-                label="Revenue Source"
-                defaultValue={revenueSources || ""}
+                <Select 
+                defaultValue="Revenue source" 
                 onChange={(e) => setRevenueSources(e.target.value)}
                 sx = {{ marginLeft: '20px' }}
-                />
+                >
+                {sourceSelection.map((source) => (
+                    <MenuItem value={source}>{source}</MenuItem>
+                    ))}
+                </Select>
                 <IconButton 
                 sx = {{ marginLeft: '20px', paddingTop: '15px', paddingBottom: '15px'}}
                 variant="outlined" 
