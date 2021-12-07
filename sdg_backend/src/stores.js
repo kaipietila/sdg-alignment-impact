@@ -29,30 +29,30 @@ const industryHierarchy = {
     }
 
 const alignmentStore = {
-    fishing: {
-        1: 2,
-        2: 1,
-        3: 2,
-        4: 3,
-        5: 1,
-        6: 4,
-        7: 2,
-        8: 1,
-        9: 3,
-        10: 2,
-        11: 4,
-        12: 4,
-        13: 4,
-        14: 4,
-        15: 2,
-        16: 3,
-        17: 2
-    },
-    tuna: {},
-    fishFarming: {
-        11: 2,
-        14: 3,
-    },
+    fishing: [
+        {'goal': 1, 'alignment' : 2},
+        {'goal': 2, 'alignment' : 1},
+        {'goal': 3, 'alignment' : 2},
+        {'goal': 4, 'alignment' : 3},
+        {'goal': 5, 'alignment' : 2},
+        {'goal': 6, 'alignment' : 4},
+        {'goal': 7, 'alignment' : 2},
+        {'goal': 8, 'alignment' : 1},
+        {'goal': 9, 'alignment' : 3},
+        {'goal': 10, 'alignment' : 2},
+        {'goal': 11, 'alignment' : 4},
+        {'goal': 12, 'alignment' : 4},
+        {'goal': 13, 'alignment' : 4},
+        {'goal': 14, 'alignment' : 4},
+        {'goal': 15, 'alignment' : 2},
+        {'goal': 16, 'alignment' : 3},
+        {'goal': 17, 'alignment' : 2}
+    ],
+    tuna: [],
+    fishFarming: [
+        {'goal': 11, 'alignment' : 2},
+        {'goal': 14, 'alignment' : 3}
+    ],
 }
 
 exports.alignmentMapping = alignmentMapping;

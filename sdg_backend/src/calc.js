@@ -4,22 +4,19 @@ const mergeAlignments = (alignments) => {
     // If there are multiple reveneue objects we need to merge them to get a 
     // company wide alignment. E.g. we get the mean of multiple alignments and round
     // the result e.g. strongly aligned + misaligned = aligned
-    const mergedAlignments = alignments.reduce((res, curr) => {
-        if (!Object.keys(res).length) {
-            const newRes = Object.assign(res, curr)
-            return newRes
+    const flattenAlignments = alignments.reduce((res, curr) => {
+        return res.concat(curr)
+    }, []);
+    const getCompanyAlignments = flattenAlignments.reduce((res, curr) => {
+        const duplicateIndex = res.findIndex((alignment) => alignment.goal === curr.goal)
+        if (duplicateIndex !== -1) {
+            res[duplicateIndex].alignment = Math.round((res[duplicateIndex].alignment + curr.alignment) / 2)
+            return [...res]
         } 
-        const newRes = Object.entries(curr).reduce((acc, goal) => {
-            if (acc[goal[0]]) {
-                const mean = Math.round((acc[goal[0]] + goal[1]) / 2)
-                acc[goal[0]] = mean
-                console.log(mean)
-            }
-            return acc
-        }, {...res})
-        return newRes
-    }, {})
-    return mergedAlignments[0]
+        return [...res, curr]
+    }, []);
+    console.log(getCompanyAlignments)
+    return getCompanyAlignments
 }
 
 const calculateSDGAlignment = (companyData) => {
@@ -32,19 +29,21 @@ const calculateSDGAlignment = (companyData) => {
         let subsource;
         [parent, subsource] = source.split('.')
         const sourceAlignments = alignmentStore[subsource]
-        if (Object.keys(sourceAlignments).length <= 17) {
-            const parentAlignment = {...alignmentStore[parent]}
-            mergedAlignments = Object.assign(parentAlignment, sourceAlignments)
-            return mergedAlignments
+        if (sourceAlignments.length <= 17) {
+            const parentAlignments = [...alignmentStore[parent]]
+            const sourceSpecifiedGoals = sourceAlignments.map((goal) => goal.goal)
+            parentMerged = [...parentAlignments.filter((goal) => !sourceSpecifiedGoals.includes(goal.goal)), 
+                ...sourceAlignments]
+            return parentMerged
         } else {
             return sourceAlignments
         }
     });
     if (companyAlignments.length > 1) {
         mergedCompanyAlignments = mergeAlignments(companyAlignments)
-        return mergedAlignments
+        return mergedCompanyAlignments
     }
-    return companyAlignments[0]
+    return companyAlignments
 };   
 
 exports.calculateSDGAlignment = calculateSDGAlignment;

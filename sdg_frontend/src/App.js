@@ -13,7 +13,7 @@ export const CompanyView = () => {
     axios.get(baseUrl + '/revenuesources').then((response) => setRevenueSources(response.data))
   }, []);
   
-  async function makePostRequest() {
+  async function createCompany() {
     let payload = companyData;
     let res = await axios.post(baseUrl + '/companyalignment', payload);
 
@@ -21,7 +21,7 @@ export const CompanyView = () => {
     console.log(data);
   }
   useEffect(() => {
-    makePostRequest()
+    createCompany()
   }, [companyData])
 
 
