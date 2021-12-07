@@ -38,6 +38,7 @@ const calculateSDGAlignment = (companyData) => {
         let subsource;
         [parent, subsource] = source.split('.')
         const sourceAlignments = alignmentStore[subsource]
+        console.log(sourceAlignments)
         if (sourceAlignments.length <= 17) {
             const parentAlignments = [...alignmentStore[parent]]
             const sourceSpecifiedGoals = sourceAlignments.map((goal) => goal.goal)

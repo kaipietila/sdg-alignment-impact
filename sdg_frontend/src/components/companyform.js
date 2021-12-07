@@ -1,4 +1,8 @@
 import { useState } from 'react';
+import TextField from '@mui/material/TextField';
+import { Box } from '@mui/system';
+import { IconButton } from '@mui/material';
+import KeyboardReturnIcon from '@mui/icons-material/KeyboardReturn';
 
 export const CompanyForm = (props) => {
     const [companyName, setCompanyName] = useState('')
@@ -12,26 +16,33 @@ export const CompanyForm = (props) => {
     }
   
     return (
-        <div>
+        <Box 
+        sx={{
+            marginTop: '20px',
+            marginLeft: '20px',
+        }}>
           <form onSubmit = {handleSubmit}>
-            <label>
-                Company name:
-            <input
-            type = 'text'
-            defaultValue = {companyName || ""}
-            onChange = {(e) => setCompanyName(e.target.value)}
-            />
-            </label>
-            <label>
-                Company revenue sources(enter e.g. fishing.fishFarming, fishing.tuna):
-            <input 
-            type = 'text'
-            defaultValue = {revenueSources || ""}
-            onChange = {(e) => setRevenueSources(e.target.value)}
-            />
-            </label>
-            <button type = 'submit'>Submit company data</button>
+                <TextField
+                id="company-name"
+                label="Company Name"
+                defaultValue={companyName || ""}
+                onChange={(e) => setCompanyName(e.target.value)}
+                sx = {{ marginLeft: '20px' }}
+                />
+                <TextField
+                id="revenue-source"
+                label="Revenue Source"
+                defaultValue={revenueSources || ""}
+                onChange={(e) => setRevenueSources(e.target.value)}
+                sx = {{ marginLeft: '20px' }}
+                />
+                <IconButton 
+                sx = {{ marginLeft: '20px', paddingTop: '15px', paddingBottom: '15px'}}
+                variant="outlined" 
+                type='submit'>
+                    <KeyboardReturnIcon />
+                </IconButton>
         </form>
-    </div>
+    </Box>
       );
   }
