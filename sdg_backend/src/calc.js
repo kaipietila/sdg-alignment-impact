@@ -10,7 +10,7 @@ const mergeAlignments = (alignments) => {
     const getCompanyAlignments = flattenAlignments.reduce((res, curr) => {
         const duplicateIndex = res.findIndex((alignment) => alignment.goal === curr.goal)
         if (duplicateIndex !== -1) {
-            res[duplicateIndex].alignment = string(Math.round((parseInt(res[duplicateIndex].alignment) + parseInt(curr.alignment)) / 2))
+            res[duplicateIndex].alignment = Math.round((parseInt(res[duplicateIndex].alignment) + parseInt(curr.alignment)) / 2).toString()
             return [...res]
         } 
         return [...res, curr]
@@ -34,6 +34,7 @@ const calculateSDGAlignment = (companyData) => {
     // If alignment for revenue source is not specified we will use parent alignment.
     // Get mean alignment for all revenue sources which is the company alignment.
     const companyAlignments = companyData.revenueSources.map((source) => {
+        console.log(source)
         let parent;
         let subsource;
         [parent, subsource] = source.split('.')

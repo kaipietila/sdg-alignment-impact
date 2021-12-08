@@ -3,17 +3,18 @@ import TextField from '@mui/material/TextField';
 import { Box } from '@mui/system';
 import { IconButton } from '@mui/material';
 import KeyboardReturnIcon from '@mui/icons-material/KeyboardReturn';
+import BackspaceIcon from '@mui/icons-material/Backspace';
 import Select from '@mui/material/Select';
 import { MenuItem } from '@mui/material';
 
 export const CompanyForm = (props) => {
     const [companyName, setCompanyName] = useState('')
-    const [revenueSources, setRevenueSources] = useState('')
+    const [revenueSources, setRevenueSources] = useState([])
     const handleSubmit = (e) => {
         e.preventDefault()
         props.setCompanyData({
             'companyName': companyName, 
-            'revenueSources': [revenueSources]
+            'revenueSources': revenueSources
         });
     }
     const sourceSelection = Object.entries(props.revenueSources).reduce((res, source) => {
@@ -38,14 +39,20 @@ export const CompanyForm = (props) => {
                 sx = {{ marginLeft: '20px' }}
                 />
                 <Select 
-                defaultValue="Revenue source" 
-                onChange={(e) => setRevenueSources(e.target.value)}
+                value={revenueSources}
+                multiple
+                onChange={(e) => setRevenueSources([...e.target.value])}
                 sx = {{ marginLeft: '20px' }}
                 >
                 {sourceSelection.map((source) => (
                     <MenuItem value={source}>{source}</MenuItem>
                     ))}
                 </Select>
+                <IconButton
+                onClick={() => setRevenueSources([])}
+                >
+                    <BackspaceIcon />
+                </IconButton>
                 <IconButton 
                 sx = {{ marginLeft: '20px', paddingTop: '15px', paddingBottom: '15px'}}
                 variant="outlined" 

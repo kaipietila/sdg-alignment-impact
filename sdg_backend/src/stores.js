@@ -20,6 +20,7 @@ const sdgMapping = {
 const alignmentMapping = {
     "2": "strongly aligned",
     "1": "aligned",
+    "0": "neutral",
     "-1": "misaligned",
     "-2": "strongly misaligned"
 }
@@ -52,6 +53,48 @@ const alignmentStore = {
     fishFarming: [
         {'goal': 11, 'alignment' : "2"},
         {'goal': 14, 'alignment' : "-1"}
+    ],
+    mining: [
+        {'goal': 1, 'alignment' : "2"},
+        {'goal': 2, 'alignment' : "1"},
+        {'goal': 3, 'alignment' : "2"},
+        {'goal': 4, 'alignment' : "-1"},
+        {'goal': 5, 'alignment' : "2"},
+        {'goal': 6, 'alignment' : "-2"},
+        {'goal': 7, 'alignment' : "2"},
+        {'goal': 8, 'alignment' : "1"},
+        {'goal': 9, 'alignment' : "-1"},
+        {'goal': 10, 'alignment' : "2"},
+        {'goal': 11, 'alignment' : "-2"},
+        {'goal': 12, 'alignment' : "-2"},
+        {'goal': 13, 'alignment' : "-2"},
+        {'goal': 14, 'alignment' : "-2"},
+        {'goal': 15, 'alignment' : "2"},
+        {'goal': 16, 'alignment' : "-1"},
+        {'goal': 17, 'alignment' : "2"}
+    ],
+    gold: [
+        {'goal': 1, 'alignment' : "-2"},
+        {'goal': 2, 'alignment' : "-1"},
+        {'goal': 3, 'alignment' : "-2"},
+        {'goal': 4, 'alignment' : "-1"},
+        {'goal': 5, 'alignment' : "-2"},
+        {'goal': 6, 'alignment' : "-2"},
+        {'goal': 7, 'alignment' : "-2"},
+        {'goal': 8, 'alignment' : "-1"},
+        {'goal': 9, 'alignment' : "-1"},
+        {'goal': 10, 'alignment' : "-2"},
+        {'goal': 11, 'alignment' : "-2"},
+        {'goal': 12, 'alignment' : "-2"},
+        {'goal': 13, 'alignment' : "-2"},
+        {'goal': 14, 'alignment' : "-2"},
+        {'goal': 15, 'alignment' : "-2"},
+        {'goal': 16, 'alignment' : "-1"},
+        {'goal': 17, 'alignment' : "-2"}
+    ],
+    aluminium: [
+        {'goal': 12, 'alignment' : "-1"},
+        {'goal': 1, 'alignment' : "-2"}
     ],
 }
 

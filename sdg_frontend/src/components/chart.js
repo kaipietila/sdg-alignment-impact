@@ -56,7 +56,7 @@ export const Chart = (props) => {
                         <CartesianGrid strokeDasharray="3 3" />
                         <XAxis dataKey="goal" angle={-35} interval={0} tickMargin={15} textAnchor="end"
                         />
-                        <YAxis type='number' domain={['dataMin-2', 'dataMax+1']}/>
+                        <YAxis type='number' domain={[-2.5, 2.5]}/>
                         <Tooltip content={<CustomTooltip />}/>
                         <Legend verticalAlign="top"/>
                         <ReferenceLine y={0} stroke="#000" />

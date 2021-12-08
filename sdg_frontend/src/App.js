@@ -6,9 +6,9 @@ import axios from 'axios';
 const baseUrl = 'http://localhost:8080'
 export const CompanyView = () => {
   const [companyData, setCompanyData] = useState({}) 
-  const [revenueSources, setRevenueSources] = useState({})
+  const [revenueSources, setRevenueSources] = useState({'no data': ['loaded']})
   const [data, setData] = useState([])
-
+  
   useEffect(() => {
     axios.get(baseUrl + '/revenuesources').then((response) => setRevenueSources(response.data))
   }, []);

@@ -25,6 +25,7 @@ app.post('/companyalignment', async(req, res) => {
             name: req.body.companyName,
             revenueSources: req.body.revenueSources
         }
+        console.log(companyData)
         const companyalignments = calc.calculateSDGAlignment(companyData)
         res.json(companyalignments)
     }
